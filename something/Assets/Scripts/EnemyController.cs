@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public enum Enemy {Bullet, BulletSpawner}
+    public enum Enemy {Bullet, BulletSpawner, DeathWall}
     public Enemy enemy;
     public GameObject spawn;
     public float spawnTime;
@@ -15,7 +15,6 @@ public class EnemyController : MonoBehaviour
     public Animator anim;
 
     public Vector2 enemyPos;
-    public CapsuleCollider2D enemyCollider;
     public float moveSpeed;
 
     public int direction;
@@ -24,10 +23,13 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
+        if(enemy != Enemy.BulletSpawner)
+            rb2d = GetComponent<Rigidbody2D>();
         enemyPos = new Vector2(transform.position.x, transform.position.y);
         if(enemy == Enemy.BulletSpawner)
             InvokeRepeating("Spawn", spawnTime, spawnTime);
+        if(enemy == Enemy.Bullet)
+            Destroy(gameObject, 5f);
     }
 
     // Update is called once per frame
@@ -40,7 +42,8 @@ public class EnemyController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb2d.velocity = (new Vector2(moveSpeed * direction, rb2d.velocity.y));
+        if(enemy != Enemy.BulletSpawner)
+            rb2d.velocity = (new Vector2(moveSpeed * direction, rb2d.velocity.y));
         /*if ((Physics2D.Raycast(new Vector2(enemyPos.x, enemyPos.y - .5f) + new Vector2(direction, 0) * 1.9f / 2, new Vector2(direction, 0)).distance <= .1))
         {
             //Debug.Log(playerNo + "" + playerPos + "" + Physics2D.Raycast(playerPos, new Vector2(direction, 0)).point);
@@ -53,6 +56,6 @@ public class EnemyController : MonoBehaviour
     void Spawn()
     {
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);
-        Instantiate(spawn, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+        Instantiate(spawn, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation, transform);
     }
 }

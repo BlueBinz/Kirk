@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Foot.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Tilemap\RuleTile\Scripts\RuleTile.cs" />
     <None Include="Assets\Tilemap\RuleTile\ScriptTemplates\NewCustomRuleTile.cs.txt" />

@@ -28,10 +28,12 @@ public class PlayerController : MonoBehaviour
         playerPos = new Vector2(transform.position.x, transform.position.y);
         jumpForce = 1.7f;
         moveSpeed = 9f;
-        characterCollider.size = new Vector2(1.62f, .8f);
+        characterCollider.size = new Vector2(1.2f, 1.6f);
         footCollider.offset = new Vector2(0, -.86f);
         jumpForce *= 732;
         jump = false;
+        if (anim != null)
+            anim.SetInteger("Direction", -1);
     }
 
     // Update is called once per frame
@@ -44,11 +46,14 @@ public class PlayerController : MonoBehaviour
         else if (anim != null)
             anim.SetBool("Jump", true);
         if (Input.GetAxis("Horizontal") < 0)
-            anim.SetInteger("Direction", -1);
+            anim.SetInteger("Direction", -1);   
         else if (Input.GetAxis("Horizontal") > 0)
             anim.SetInteger("Direction", 1);
         jump = ObjectsTouchingFeet.ToArray().Length > 0 && Input.GetAxis("Vertical") > 0 ? true : false;
         fastFall = Input.GetAxis("FastFall") > 0 ? true : false;
+        Debug.DrawRay(new Vector2(playerPos.x - .55f/* * anim.GetInteger("Direction")*/, playerPos.y), new Vector2(-1, 0));
+        if (Physics2D.Raycast(new Vector2(playerPos.x - .55f/** anim.GetInteger("Direction")*/, playerPos.y), new Vector2(-1, 0)).distance < .1f)
+            Debug.Log("dead");
     }
 
     //For physics stuff
