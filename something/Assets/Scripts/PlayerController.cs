@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
 
     private bool jump;
     private bool fastFall;
+    private bool dead;
+
+    private Vector2 lastCheckpoint;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +35,7 @@ public class PlayerController : MonoBehaviour
         footCollider.offset = new Vector2(0, -.86f);
         jumpForce *= 732;
         jump = false;
+        dead = false;
         if (anim != null)
             anim.SetInteger("Direction", -1);
     }
@@ -53,7 +57,10 @@ public class PlayerController : MonoBehaviour
         fastFall = Input.GetAxis("FastFall") > 0 ? true : false;
         Debug.DrawRay(new Vector2(playerPos.x - .55f/* * anim.GetInteger("Direction")*/, playerPos.y), new Vector2(-1, 0));
         if (Physics2D.Raycast(new Vector2(playerPos.x - .55f/** anim.GetInteger("Direction")*/, playerPos.y), new Vector2(-1, 0)).distance < .1f)
+        {
             Debug.Log("dead");
+            dead = true;
+        }
     }
 
     //For physics stuff
@@ -74,5 +81,15 @@ public class PlayerController : MonoBehaviour
         rb2d.isKinematic = true;
         rb2d.isKinematic = false;
         rb2d.AddForce(Vector2.up * jump);
+    }
+
+    public bool GetDead()
+    {
+        return dead;
+    }
+
+    public Vector2 GetCheckpoint()
+    {
+        return lastCheckpoint;
     }
 }

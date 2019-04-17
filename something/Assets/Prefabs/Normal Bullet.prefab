@@ -124,7 +124,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3709516999636483852
 Transform:
   m_ObjectHideFlags: 0
@@ -179,7 +179,6 @@ MonoBehaviour:
   spawnPoints: []
   anim: {fileID: 0}
   enemyPos: {x: 0, y: 0}
-  enemyCollider: {fileID: 3709516999636483853}
   moveSpeed: 15
   direction: -1
 --- !u!70 &3709516999636483853

@@ -133,6 +133,7 @@ MonoBehaviour:
   enemyPos: {x: 0, y: 0}
   moveSpeed: 3
   direction: -1
+  vertical: 0
 --- !u!61 &6217336550484839938
 BoxCollider2D:
   m_ObjectHideFlags: 0
