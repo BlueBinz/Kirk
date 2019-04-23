@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public PlayerController player;
     private int lives;
     public GameObject deathWall;
-
+    public GameObject[] chargeEnemies;
 
     private Vector2 checkpoint;
     private Vector2 deathWallCheckpoint;

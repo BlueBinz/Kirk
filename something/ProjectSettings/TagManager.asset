@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Projectile
   - Death_Wall
+  - Level
   layers:
   - Default
   - TransparentFX
