@@ -35,10 +35,13 @@ public class EnemyController : MonoBehaviour
 
     //charge attributes
     private float jumpForce = 1.875f * 732;
+
+    //charge / circle attributes
     public BoxCollider2D foot;
 
     //charge spawner attributes
     private bool spawned;
+    public PlayerController player;
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +64,10 @@ public class EnemyController : MonoBehaviour
         {
             timeToJump = 1;
             Destroy(gameObject, 12f);
+            rb2d.velocity = new Vector2(moveSpeed * direction, 0);
         }
+        if (enemy == Enemy.ChargeSpawner)
+            spawned = false;
     }
 
     // Update is called once per frame
@@ -106,8 +112,14 @@ public class EnemyController : MonoBehaviour
             var offset = new Vector2(Mathf.Sin(_angle), Mathf.Cos(_angle)) * Radius;
             transform.position = _centre + offset;
         }
-        if (timeToJump > 0)
+        if (enemy == Enemy.Charge && timeToJump > 0)
             timeToJump -= Time.deltaTime;
+        if(enemy == Enemy.ChargeSpawner && !spawned && Vector2.Distance(enemyPos, player.playerPos)<= 40)
+        {
+            Debug.Log("distance: " + Vector2.Distance(enemyPos, player.playerPos));
+            Instantiate(spawn, enemyPos, transform.rotation, FindObjectOfType<EntityStorage>().transform);
+            spawned = true;
+        }
     }
 
     void FixedUpdate()
@@ -132,7 +144,7 @@ public class EnemyController : MonoBehaviour
         Instantiate(spawn, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation, FindObjectOfType<EntityStorage>().transform);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    /*void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Player collided with" + collision.collider.gameObject.name);
         if (collision.gameObject.tag == "Level")
@@ -142,5 +154,5 @@ public class EnemyController : MonoBehaviour
             if (Mathf.Abs(collision.transform.position.y - enemyPos.y) < .1f)
                 vertDirection *= -1;
         }
-    }
+    }*/
 }
