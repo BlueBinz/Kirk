@@ -11,7 +11,10 @@ public class Foot : MonoBehaviour
     {
         try
         {
-            player.ObjectsTouchingFeet.Add(collision);
+            if (collision.name != "Death_Wall" && collision.name != "Goal" && collision.name != "Checkpoint") {
+                Debug.Log(collision.name);
+                player.ObjectsTouchingFeet.Add(collision);
+            }
         }
         catch (Exception e) { }
     }

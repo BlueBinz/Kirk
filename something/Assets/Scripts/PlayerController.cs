@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public Vector2 playerPos;
     public CapsuleCollider2D characterCollider;
 
+    public GameManager gameManager;
+
     public float jumpForce;
     public float moveSpeed;
     public float jumpSpeedMulti = 1.7f;
@@ -20,8 +23,12 @@ public class PlayerController : MonoBehaviour
     private bool jump;
     private bool fastFall;
     //private bool dead;
+    public bool passedCheckpoint;
+    public bool won;
 
     private Vector2 lastCheckpoint;
+
+    private float timeToCheck;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +45,7 @@ public class PlayerController : MonoBehaviour
         //dead = false;
         if (anim != null)
             anim.SetInteger("Direction", -1);
+        timeToCheck = 0;
     }
 
     // Update is called once per frame
@@ -55,6 +63,8 @@ public class PlayerController : MonoBehaviour
             anim.SetInteger("Direction", 1);
         jump = ObjectsTouchingFeet.ToArray().Length > 0 && Input.GetAxis("Vertical") > 0 ? true : false;
         fastFall = Input.GetAxis("FastFall") > 0 ? true : false;
+        if (timeToCheck > 0)
+            timeToCheck -= Time.deltaTime;
         /*Debug.DrawRay(new Vector2(playerPos.x - .55f * anim.GetInteger("Direction"), playerPos.y), new Vector2(-1, 0));
         if (Physics2D.Raycast(new Vector2(playerPos.x - .55f * anim.GetInteger("Direction"), playerPos.y), new Vector2(-1, 0)).distance < .1f)
         {
@@ -91,5 +101,24 @@ public class PlayerController : MonoBehaviour
     public Vector2 GetCheckpoint()
     {
         return lastCheckpoint;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        try
+        {
+            Debug.Log(collision.name);
+            if (timeToCheck <= 0 && collision.name == "Checkpoint")
+            {
+                passedCheckpoint = true;
+                lastCheckpoint = new Vector2(collision.transform.position.x, playerPos.y);
+                timeToCheck = 1f;
+            }
+            if (collision.name == "Goal")
+                won = true;
+            if (collision.name == "Death Wall")
+                gameManager.setRestart(true);
+        }
+        catch (Exception e) { }
     }
 }

@@ -89,13 +89,13 @@ public class EnemyController : MonoBehaviour
         }
         if (enemy == Enemy.Charge && timeToJump > 0)
             timeToJump -= Time.deltaTime;
-        if (enemy == Enemy.Charge && Physics2D.Raycast(foot.transform.position, new Vector2(0, -1)).distance <= .1f && Physics2D.Raycast(foot.transform.position, new Vector2(0, -1)).collider.gameObject.gameObject.name == "Player")
+        if (enemy == Enemy.Charge && Physics2D.Raycast(foot.transform.position, new Vector2(0, -1)).distance <= 4f && Physics2D.Raycast(foot.transform.position, new Vector2(0, -1)).collider.gameObject.name == "kirk_color")
         {
             Debug.Log("Jomped");
             gameManager.setRestart(true);
         }
-        if (enemy == Enemy.Charge)
-            Debug.Log(Physics2D.Raycast(foot.transform.position, new Vector2(0, -1)).collider.gameObject.name);
+        /*if (enemy == Enemy.Charge && Physics2D.Raycast(foot.transform.position, new Vector2(0, -1)).collider.gameObject.name == "kirk_color") //need to fix (hitting own collider as of right now)
+            gameManager.setRestart(true);*/
         if (enemy == Enemy.ChargeSpawner && !spawned && Vector2.Distance(enemyPos, player.playerPos)<= 40)
         {
             Debug.Log("distanc  e: " + Vector2.Distance(enemyPos, player.playerPos));

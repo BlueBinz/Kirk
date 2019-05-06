@@ -75,9 +75,11 @@ MonoBehaviour:
   moveSpeed: 15
   direction: -1
   vertical: 0
+  gameManager: {fileID: 0}
   RotateSpeed: 0
   Radius: 0
   foot: {fileID: 255407861982681133}
+  player: {fileID: 0}
 --- !u!1 &3526808986999865299
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,7 +93,7 @@ GameObject:
   - component: {fileID: 255407861982681135}
   - component: {fileID: 255407861982681133}
   - component: {fileID: 255407861982681136}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerOnePlaceholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

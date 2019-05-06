@@ -17,6 +17,36 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6541300163570463195, guid: 8b1dd4c18db82634d9e2ab019e050b3a,
+        type: 3}
+      propertyPath: vertical
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6541300163570463195, guid: 8b1dd4c18db82634d9e2ab019e050b3a,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6541300163570463195, guid: 8b1dd4c18db82634d9e2ab019e050b3a,
+        type: 3}
+      propertyPath: direction
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6541300163570463196, guid: 8b1dd4c18db82634d9e2ab019e050b3a,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6541300163570463196, guid: 8b1dd4c18db82634d9e2ab019e050b3a,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6541300163570463196, guid: 8b1dd4c18db82634d9e2ab019e050b3a,
+        type: 3}
+      propertyPath: m_Direction
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6541300163570463197, guid: 8b1dd4c18db82634d9e2ab019e050b3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -71,21 +101,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6541300163570463195, guid: 8b1dd4c18db82634d9e2ab019e050b3a,
-        type: 3}
-      propertyPath: vertical
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6541300163570463195, guid: 8b1dd4c18db82634d9e2ab019e050b3a,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6541300163570463195, guid: 8b1dd4c18db82634d9e2ab019e050b3a,
-        type: 3}
-      propertyPath: direction
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6541300162898881765, guid: 8b1dd4c18db82634d9e2ab019e050b3a,
         type: 3}
