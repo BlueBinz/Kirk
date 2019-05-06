@@ -18,6 +18,7 @@ public class MainManager : MonoBehaviour
     private void Awake()
     {
         SceneManager.LoadSceneAsync(LevelBuildIndex, LoadSceneMode.Additive);
+        livesText.text = 3.ToString();
     }
 
     public void ResetLevel()

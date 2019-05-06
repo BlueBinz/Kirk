@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
             }
             if (collision.name == "Goal")
                 won = true;
-            if (collision.name == "Death Wall")
+            if (collision.name == "Death_Wall")
                 gameManager.setRestart(true);
         }
         catch (Exception e) { }
