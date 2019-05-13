@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
         if (anim != null)
             anim.SetInteger("Direction", -1);
         timeToCheck = 0;
+        won = false;
     }
 
     // Update is called once per frame

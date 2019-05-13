@@ -5,28 +5,44 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public PlayerController player;
-    private int lives;
+    public int lives;
     public GameObject deathWall;
 
-    private Vector2 checkpoint;
-    private Vector2 deathWallCheckpoint;
+    public Vector2 checkpoint;
+    public Vector2 deathWallCheckpoint;
+
+    public Vector2 originalCheckpoint;
+    public Vector2 originalDeathWallCheckpoint;
 
     private bool restart;
     private float timeToDie;
 
     public MainManager mainManager;
-    
+
+    private void Awake()
+    {
+        checkpoint = player.transform.position;
+        originalCheckpoint = checkpoint;
+        deathWallCheckpoint = deathWall.transform.position;
+        originalDeathWallCheckpoint = deathWallCheckpoint;
+    }
     // Start is called before the first frame update
     void Start()
     {
         lives = 3;
-        checkpoint = player.transform.position;
-        deathWallCheckpoint = deathWall.transform.position;
         restart = false;
         Debug.Log("i have trillion life");
         timeToDie = 0;
+
+        //post death
         mainManager = FindObjectOfType<MainManager>();
+        lives = int.Parse(mainManager.livesText.text);
+        checkpoint = mainManager.checkpoint;
+        deathWallCheckpoint = mainManager.deathWallCheckpoint;
+        player.transform.position = checkpoint;
+        deathWall.transform.position = deathWallCheckpoint;
         //set checkpoint to base checkpoint
+        Debug.Log("game manager has " + lives + " life.");
     }
 
     // Update is called once per frame
@@ -54,28 +70,19 @@ public class GameManager : MonoBehaviour
 
     void TakeLives(int take)
     {
-        lives--;
-        if (lives <= 0)
-            fullRestart();
-        else
-            Restart();
+        lives -= take;
+        restart = false;
         Debug.Log("mr have " + lives + " lives");
     }
 
-    void Restart()
+    /*public void FullReset()
     {
-        //restart at checkpoint
+        mainManager = FindObjectOfType<MainManager>();
+        lives = 3;
         restart = false;
-    }
+        Debug.Log("i have trillion life");
+        timeToDie = 0;
+    }*/
 
-    void fullRestart()
-    {
-        //reset game
-        restart = false;
-    }
-
-    public void setRestart(bool b)
-    {
-        this.restart = b;
-    }
+    public void setRestart(bool b) { this.restart = b; }
 }
